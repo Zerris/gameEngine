@@ -1,3 +1,4 @@
+//Entity: An instance of a textured Model
 package entities;
 
 import models.TexturedModel;

@@ -33,6 +33,7 @@ public abstract class ShaderProgram {
 
     protected abstract void getAllUniformLocations();
 
+    //Returns location of uniform veriable
     protected int getUniformLocation(String uniformName) {
         return GL20.glGetUniformLocation(programID,uniformName);
     }

@@ -21,12 +21,12 @@ public class DisplayManager {
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH,HEIGHT));
             Display.create(new PixelFormat(),attribs);
-            Display.setTitle("Ponyville");
+            Display.setTitle("My Game");
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
 
-        GL11.glViewport(0,0,WIDTH,HEIGHT);
+        GL11.glViewport(0,0,WIDTH,HEIGHT); //Tells GL to use the whole display to render the game in.
     }
 
     public static void updateDisplay() {
@@ -37,7 +37,7 @@ public class DisplayManager {
     }
     public static void closeDisplay() {
 
-        Display.destroy();
+        Display.destroy(); //close
 
     }
 }

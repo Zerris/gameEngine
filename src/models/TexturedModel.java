@@ -1,3 +1,4 @@
+//Contains both model and texture
 package models;
 
 import textures.ModelTexture;

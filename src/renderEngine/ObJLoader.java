@@ -24,9 +24,9 @@ public class ObJLoader {
         }
         BufferedReader reader = new BufferedReader(fr);
         String line;
-        List<Vector3f> vertices = new ArrayList<Vector3f>();
-        List<Vector2f> textures = new ArrayList<Vector2f>();
-        List<Vector3f> normals = new ArrayList<Vector3f>();
+        List<Vector3f> vertices = new ArrayList<Vector3f>(); // Vertex positions
+        List<Vector2f> textures = new ArrayList<Vector2f>(); // texture coordinates
+        List<Vector3f> normals = new ArrayList<Vector3f>();  // Lightning
         List<Integer> indices = new ArrayList<Integer>();
         float[] verticesArray = null;
         float[] normalsArray = null;
@@ -38,16 +38,15 @@ public class ObJLoader {
                 line = reader.readLine();
                 String[] currentLine = line.split(" ");
                 if (line.startsWith("v ")) {
-                    Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]),
-                            Float.parseFloat(currentLine[2]),Float.parseFloat(currentLine[3]));
+                    Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]),
+                            Float.parseFloat(currentLine[3]));
                     vertices.add(vertex);
                 } else if (line.startsWith("vt ")) {
-                    Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]),
-                            Float.parseFloat(currentLine[2]));
+                    Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]));
                     textures.add(texture);
                 } else if (line.startsWith("vn ")) {
-                    Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]),
-                            Float.parseFloat(currentLine[2]),Float.parseFloat(currentLine[3]));
+                    Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]),
+                            Float.parseFloat(currentLine[3]));
                     normals.add(normal);
                 } else if (line.startsWith("f ")) {
                     textureArray = new float[vertices.size() * 2];
@@ -93,9 +92,8 @@ public class ObJLoader {
         return loader.loadToVAO(verticesArray,textureArray,normalsArray,indicesArray);
     }
 
-    private static void processVertex(String[] vertexData, List<Integer> indices,
-            List<Vector2f> textures, List<Vector3f> normals, float[] textureArray,
-            float[] normalsArray) {
+    private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures,
+            List<Vector3f> normals, float[] textureArray, float[] normalsArray) {
         int currentVertexPointer = Integer.parseInt(vertexData[0]) - 1;
         indices.add(currentVertexPointer);
         Vector2f currentTex = textures.get(Integer.parseInt(vertexData[1]) - 1);
