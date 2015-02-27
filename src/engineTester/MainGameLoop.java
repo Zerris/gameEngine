@@ -44,6 +44,7 @@ public class MainGameLoop {
 	TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
 	TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
 
+	// ***********ENTITY TEXTURE STUFF**********
 	ModelData treeData = OBJFileLoader.loadOBJ("tree");
 	RawModel treeModel = loader.loadToVAO(treeData.getVertices(), treeData.getTextureCoords(), treeData.getNormals(), treeData.getIndices());
 	TexturedModel tree = new TexturedModel(treeModel, new ModelTexture(loader.loadTexture("tree")));

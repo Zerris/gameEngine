@@ -45,7 +45,7 @@ public class Loader {
 
     public RawModel loadToVAO(float[] positions) {
 	int vaoID = createVAO();
-	this.storeDataInAttributeList(vaoID, 2, positions);
+	this.storeDataInAttributeList(0, 2, positions);
 	unbindVAO();
 	return new RawModel(vaoID, positions.length / 2);
     }

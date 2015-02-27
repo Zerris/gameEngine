@@ -44,7 +44,7 @@ public class GuiRenderer {
 	GL30.glBindVertexArray(0);
 	shader.stop();
     }
-    
+
     public void cleanUp() {
 	shader.cleanUp();
     }
