@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.TexturedModel;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
-import models.TexturedModel;
 import shaders.StaticShader;
 import shaders.TerrainShader;
+import skybox.SkyboxRenderer;
 import terrains.Terrain;
 import entities.Camera;
 import entities.Entity;
@@ -23,9 +25,9 @@ public class MasterRenderer {
     private static final float NEAR_PLANE = 0.1f;
     private static final float FAR_PLANE = 1000;
     
-    private static final float RED = 0.5f;
-    private static final float GREEN = 0.5f;
-    private static final float BLUE = 0.5f;
+    private static final float RED = 0.5444f;
+    private static final float GREEN = 0.62f;
+    private static final float BLUE = 0.69f;
 
     private Matrix4f projectionMatrix;
 
@@ -37,12 +39,15 @@ public class MasterRenderer {
 
     private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
     private List<Terrain> terrains = new ArrayList<Terrain>();
+    
+    private SkyboxRenderer skyboxRenderer;
 
-    public MasterRenderer() {
+    public MasterRenderer(Loader loader) {
 	enableCulling();
 	createProjectionMatrix();
 	renderer = new EntityRenderer(shader, projectionMatrix);
 	terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
+	skyboxRenderer = new SkyboxRenderer(loader, projectionMatrix);
     }
 
     public static void enableCulling() {
@@ -68,6 +73,7 @@ public class MasterRenderer {
 	terrainShader.loadViewMatrix(camera);
 	terrainRenderer.render(terrains);
 	terrainShader.stop();
+	skyboxRenderer.render(camera);
 	terrains.clear();
 	entities.clear();
     }
