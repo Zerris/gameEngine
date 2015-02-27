@@ -82,33 +82,31 @@ public class MainGameLoop {
 
 		entities.add(new Entity(tree, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, random.nextFloat() * 0.1f + 0.6f));
 	    }
-	    if (i % 8 == 0) {
-		float x = random.nextFloat() * 800 - 400;
-		float z = random.nextFloat() * -600;
-		float y = terrain.getHeightOfTerrain(x, z);
-		entities.add(new Entity(grass, new Vector3f(x, y, x), 0, random.nextFloat(), 0, 1));
-		grass.getTexture().setHasTransparency(true);
-		grass.getTexture().setUseFakeLighting(true);
-		grass.getTexture().setHasTransparency(true);
-	    }
+	    float x = random.nextFloat() * 800 - 400;
+	    float z = random.nextFloat() * -600;
+	    float y = terrain.getHeightOfTerrain(x, z);
+	    
+	    entities.add(new Entity(grass, new Vector3f(x, y, x), 0, random.nextFloat() * 360, 0, 1));
+	    grass.getTexture().setHasTransparency(true);
+	    grass.getTexture().setUseFakeLighting(true);
+	    grass.getTexture().setHasTransparency(true);
 	}
 
 	// Light source position and color
 	List<Light> lights = new ArrayList<Light>();
 	lights.add(new Light(new Vector3f(0, 10000, -7000), new Vector3f(0.4f, 0.4f, 0.4f)));
-	lights.add(new Light(new Vector3f(185,10,-293), new Vector3f(2,0,0), new Vector3f(1, 0.01f, 0.002f)));
-	lights.add(new Light(new Vector3f(370,17,-300), new Vector3f(0,2,2), new Vector3f(1, 0.01f, 0.002f)));
-	lights.add(new Light(new Vector3f(293,7,-305), new Vector3f(2,2,0), new Vector3f(1, 0.01f, 0.002f)));
-	
-	entities.add(new Entity(lamp, new Vector3f(185,-4.7f,-293), 0, 0,0,1));
-	entities.add(new Entity(lamp, new Vector3f(370,4.2f,-300), 0, 0,0,1));
-	entities.add(new Entity(lamp, new Vector3f(293,-6.8f,-305), 0, 0,0,1));
+	lights.add(new Light(new Vector3f(185, 10, -293), new Vector3f(2, 0, 0), new Vector3f(1, 0.01f, 0.002f)));
+	lights.add(new Light(new Vector3f(370, 17, -300), new Vector3f(0, 2, 2), new Vector3f(1, 0.01f, 0.002f)));
+	lights.add(new Light(new Vector3f(293, 7, -305), new Vector3f(2, 2, 0), new Vector3f(1, 0.01f, 0.002f)));
+
+	entities.add(new Entity(lamp, new Vector3f(185, -4.7f, -293), 0, 0, 0, 1));
+	entities.add(new Entity(lamp, new Vector3f(370, 4.2f, -300), 0, 0, 0, 1));
+	entities.add(new Entity(lamp, new Vector3f(293, -6.8f, -305), 0, 0, 0, 1));
 
 	MasterRenderer renderer = new MasterRenderer(loader);
 
 	RawModel bunnyModel = ObJLoader.loadObjModel("person", loader);
-	TexturedModel stanfordBunny = new TexturedModel(bunnyModel, new ModelTexture(
-		loader.loadTexture("playerTexture")));
+	TexturedModel stanfordBunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("playerTexture")));
 
 	Player player = new Player(stanfordBunny, new Vector3f(100, 5, -150), 0, 180, 0, 0.6f);
 	Camera camera = new Camera(player);
@@ -116,7 +114,7 @@ public class MainGameLoop {
 	List<GuiTexture> guis = new ArrayList<GuiTexture>();
 	GuiTexture gui = new GuiTexture(loader.loadTexture("socuwan"), new Vector2f(0.5f, 0.5f), new Vector2f(0.25f, 0.25f));
 	guis.add(gui);
-	
+
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 
 	while (!Display.isCloseRequested()) {
